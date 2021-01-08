@@ -1,3 +1,8 @@
-#!/bin/sh
+#! /bin/bash
+adduser -G www-data -D www-data
 
-php -S 0.0.0.0:5050 -t /var/www/wordpress/
+chown -R www-data:www-data /var/www/wordpress
+#php-fpm7 & nginx -g 'daemon off;' 
+
+# Start supervisord
+supervisord  -c /etc/supervisord.conf  & tail -f /dev/null
