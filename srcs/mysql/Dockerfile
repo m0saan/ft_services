@@ -1,8 +1,18 @@
 FROM alpine:latest
 
-RUN		apk add mariadb mariadb-client && \
+RUN		apk add mariadb mariadb-common mariadb-client openrc && \
 		mkdir -p /run/mysqld/
-COPY	/srcs/start.sh			/
-EXPOSE 3306
+RUN     apk add supervisor
 
-ENTRYPOINT sh start.sh"
+COPY	/srcs/start.sh			/
+COPY	/srcs/build.sh			/
+COPY    /srcs/supervisord.conf  /etc/supervisord.conf
+COPY	/srcs/my.cnf /etc/mysql/my.cnf
+COPY    srcs/mysql-service.sql .
+
+RUN     chmod +x build.sh
+VOLUME [ "/sys/fs/cgroup" ]
+
+# EXPOSE 3306
+
+ENTRYPOINT sh build.sh
