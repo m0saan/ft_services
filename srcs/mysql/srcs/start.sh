@@ -1,18 +1,27 @@
 #!/bin/sh
 
-# Install MariaDB database(mariadb-install-db is a symlink to mysql_install_db).
-mariadb-install-db -u root
+openrc
 
-# Invoking "mysqld" will start the MySQL server. Terminating "mysqld" will shutdown the MySQL server.
-mysqld -u root & sleep 5
+touch /run/openrc/softlevel
 
-# Create Wordpress database.
-mysql -u root --execute="CREATE DATABASE wordpress;"
+echo "Install modfication.."
+/usr/bin/mysql_install_db
 
-# Import previously backed up database to MariaDB database server (wordpress < /wordpress.sql).
-mysql -u root wordpress < wordpress.sql
 
-# Create new user "root" with password "root" and give permissions.
-mysql -u root --execute="CREATE USER 'root'@'%' IDENTIFIED BY 'root'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; USE wordpress; FLUSH PRIVILEGES;"
+echo "starting mariadb"
+rc-service mariadb start
 
-sleep infinite
+echo "Apllying DataBase"
+
+echo "CREATE DATABASE wordpress;" | mysql -u root
+
+echo "CREATE USER 'root'@'%' identified by 'root';" | mysql -u root
+
+echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'%';" | mysql -u root
+
+echo "FLUSH PRIVILEGES;" | mysql -u root
+
+# mysql -u root wordpress  < mysql-service.sql
+
+# start the MariaDB daemon.
+/usr/bin/mysqld_safe --datadir="/var/lib/mysql"
