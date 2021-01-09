@@ -1,117 +1,155 @@
 <?php
+/* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * phpMyAdmin configuration file, you can use it as base for the manual
- * configuration. For easier setup you can use "setup/".
+ * phpMyAdmin sample configuration, you can use it as base for
+ * manual configuration. For easier setup you can use setup/
  *
- * All directives are explained in Documentation.html and on phpMyAdmin
- * wiki <http://wiki.phpmyadmin.net>.
+ * All directives are explained in documentation in the doc/ folder
+ * or at <https://docs.phpmyadmin.net/>.
+ *
+ * @package PhpMyAdmin
  */
-
-/*
- * This is needed for cookie based authentication to encrypt password in
- * cookie
- */
-$cfg['blowfish_secret'] = 'MUSTBECHANGEDONINSTALL'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+declare(strict_types=1);
 
 /**
- * Server(s) configuration
+ * This is needed for cookie based authentication to encrypt password in
+ * cookie. Needs to be 32 chars long.
+ */
+$cfg['blowfish_secret'] = 'N9Fe8k2.p]}OI0z4rLYjPfUDU3AV70Xh'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+
+/**
+ * Servers configuration
  */
 $i = 0;
 
-// The $cfg['Servers'] array starts with $cfg['Servers'][1].  Do not use
-// $cfg['Servers'][0]. You can disable a server config entry by setting host
-// to ''. If you want more than one server, just copy following section
-// (including $i incrementation) serveral times. There is no need to define
-// full server array, just define values you need to change.
+/**
+ * First server
+ */
 $i++;
-$cfg['Servers'][$i]['host']          = 'localhost'; // MySQL hostname or IP address
-$cfg['Servers'][$i]['port']          = '';          // MySQL port - leave blank for default port
-$cfg['Servers'][$i]['socket']        = '';          // Path to the socket - leave blank for default socket
-$cfg['Servers'][$i]['connect_type']  = 'tcp';       // How to connect to MySQL server ('tcp' or 'socket')
-$cfg['Servers'][$i]['extension']     = 'mysqli';    // The php MySQL extension to use ('mysql' or 'mysqli')
-$cfg['Servers'][$i]['compress']      = FALSE;       // Use compressed protocol for the MySQL connection
-                                                    // (requires PHP >= 4.3.0)
-$cfg['Servers'][$i]['controluser']   = '';          // MySQL control user settings
-                                                    // (this user must have read-only
-$cfg['Servers'][$i]['controlpass']   = '';          // access to the "mysql/user"
-                                                    // and "mysql/db" tables).
-                                                    // The controluser is also
-                                                    // used for all relational
-                                                    // features (pmadb)
-$cfg['Servers'][$i]['auth_type']     = 'cookie';    // Authentication method (config, http or cookie based)?
-$cfg['Servers'][$i]['user']          = '';          // MySQL user
-$cfg['Servers'][$i]['password']      = '';          // MySQL password (only needed
-                                                    // with 'config' auth_type)
-$cfg['Servers'][$i]['only_db']       = '';          // If set to a db-name, only
-                                                    // this db is displayed in left frame
-                                                    // It may also be an array of db-names, where sorting order is relevant.
-$cfg['Servers'][$i]['hide_db']       = '';          // Database name to be hidden from listings
-$cfg['Servers'][$i]['verbose']       = '';          // Verbose name for this host - leave blank to show the hostname
+/* Authentication type */
+$cfg['Servers'][$i]['auth_type'] = 'cookie';
+/* Server parameters */
+$cfg['Servers'][$i]['host'] = 'mysql-service';
+$cfg['Servers'][$i]['compress'] = false;
+$cfg['Servers'][$i]['AllowNoPassword'] = false;
 
-$cfg['Servers'][$i]['pmadb']         = '';          // Database used for Relation, Bookmark and PDF Features
-                                                    // (see scripts/create_tables.sql)
-                                                    //   - leave blank for no support
-                                                    //     DEFAULT: 'phpmyadmin'
-$cfg['Servers'][$i]['bookmarktable'] = '';          // Bookmark table
-                                                    //   - leave blank for no bookmark support
-                                                    //     DEFAULT: 'pma_bookmark'
-$cfg['Servers'][$i]['relation']      = '';          // table to describe the relation between links (see doc)
-                                                    //   - leave blank for no relation-links support
-                                                    //     DEFAULT: 'pma_relation'
-$cfg['Servers'][$i]['table_info']    = '';          // table to describe the display fields
-                                                    //   - leave blank for no display fields support
-                                                    //     DEFAULT: 'pma_table_info'
-$cfg['Servers'][$i]['table_coords']  = '';          // table to describe the tables position for the PDF schema
-                                                    //   - leave blank for no PDF schema support
-                                                    //     DEFAULT: 'pma_table_coords'
-$cfg['Servers'][$i]['pdf_pages']     = '';          // table to describe pages of relationpdf
-                                                    //   - leave blank if you don't want to use this
-                                                    //     DEFAULT: 'pma_pdf_pages'
-$cfg['Servers'][$i]['column_info']   = '';          // table to store column information
-                                                    //   - leave blank for no column comments/mime types
-                                                    //     DEFAULT: 'pma_column_info'
-$cfg['Servers'][$i]['history']       = '';          // table to store SQL history
-                                                    //   - leave blank for no SQL query history
-                                                    //     DEFAULT: 'pma_history'
-$cfg['Servers'][$i]['verbose_check'] = TRUE;        // set to FALSE if you know that your pma_* tables
-                                                    // are up to date. This prevents compatibility
-                                                    // checks and thereby increases performance.
-$cfg['Servers'][$i]['AllowRoot']     = TRUE;        // whether to allow root login
-$cfg['Servers'][$i]['AllowDeny']['order']           // Host authentication order, leave blank to not use
-                                     = '';
-$cfg['Servers'][$i]['AllowDeny']['rules']           // Host authentication rules, leave blank for defaults
-                                     = array();
-$cfg['Servers'][$i]['AllowNoPassword']              // Allow logins without a password. Do not change the FALSE
-                                     = FALSE;       // default unless you're running a passwordless MySQL server
-$cfg['Servers'][$i]['designer_coords']              // Leave blank (default) for no Designer support, otherwise
-                                     = '';          // set to suggested 'pma_designer_coords' if really needed
-$cfg['Servers'][$i]['bs_garbage_threshold']         // Blobstreaming: Recommented default value from upstream
-                                     = 50;          //   DEFAULT: '50'
-$cfg['Servers'][$i]['bs_repository_threshold']      // Blobstreaming: Recommented default value from upstream
-                                     = '32M';       //   DEFAULT: '32M'
-$cfg['Servers'][$i]['bs_temp_blob_timeout']         // Blobstreaming: Recommented default value from upstream
-                                     = 600;         //   DEFAULT: '600'
-$cfg['Servers'][$i]['bs_temp_log_threshold']        // Blobstreaming: Recommented default value from upstream
-                                     = '32M';       //   DEFAULT: '32M'
-/*
+/**
+ * phpMyAdmin configuration storage settings.
+ */
+
+/* User used to manipulate with storage */
+// $cfg['Servers'][$i]['controlhost'] = '';
+// $cfg['Servers'][$i]['controlport'] = '';
+// $cfg['Servers'][$i]['controluser'] = 'pma';
+// $cfg['Servers'][$i]['controlpass'] = 'pmapass';
+
+/* Storage database and tables */
+// $cfg['Servers'][$i]['pmadb'] = 'phpmyadmin';
+// $cfg['Servers'][$i]['bookmarktable'] = 'pma__bookmark';
+// $cfg['Servers'][$i]['relation'] = 'pma__relation';
+// $cfg['Servers'][$i]['table_info'] = 'pma__table_info';
+// $cfg['Servers'][$i]['table_coords'] = 'pma__table_coords';
+// $cfg['Servers'][$i]['pdf_pages'] = 'pma__pdf_pages';
+// $cfg['Servers'][$i]['column_info'] = 'pma__column_info';
+// $cfg['Servers'][$i]['history'] = 'pma__history';
+// $cfg['Servers'][$i]['table_uiprefs'] = 'pma__table_uiprefs';
+// $cfg['Servers'][$i]['tracking'] = 'pma__tracking';
+// $cfg['Servers'][$i]['userconfig'] = 'pma__userconfig';
+// $cfg['Servers'][$i]['recent'] = 'pma__recent';
+// $cfg['Servers'][$i]['favorite'] = 'pma__favorite';
+// $cfg['Servers'][$i]['users'] = 'pma__users';
+// $cfg['Servers'][$i]['usergroups'] = 'pma__usergroups';
+// $cfg['Servers'][$i]['navigationhiding'] = 'pma__navigationhiding';
+// $cfg['Servers'][$i]['savedsearches'] = 'pma__savedsearches';
+// $cfg['Servers'][$i]['central_columns'] = 'pma__central_columns';
+// $cfg['Servers'][$i]['designer_settings'] = 'pma__designer_settings';
+// $cfg['Servers'][$i]['export_templates'] = 'pma__export_templates';
+
+/**
  * End of servers configuration
  */
 
-/*
+/**
  * Directories for saving/loading files from server
  */
-$cfg['UploadDir'] = '/var/lib/phpMyAdmin/upload';
-$cfg['SaveDir']   = '/var/lib/phpMyAdmin/save';
+$cfg['UploadDir'] = '';
+$cfg['SaveDir'] = '';
 
-/*
- * Disable the default warning that is displayed on the DB Details Structure
- * page if any of the required Tables for the relation features is not found
+/**
+ * Whether to display icons or text or both icons and text in table row
+ * action segment. Value can be either of 'icons', 'text' or 'both'.
+ * default = 'both'
  */
-$cfg['PmaNoRelation_DisableWarning'] = TRUE;
+//$cfg['RowActionType'] = 'icons';
 
-/*
- * phpMyAdmin 4.4.x is no longer maintained by upstream, but security fixes
- * are still backported by downstream.
+/**
+ * Defines whether a user should be displayed a "show all (records)"
+ * button in browse mode or not.
+ * default = false
  */
-$cfg['VersionCheck'] = FALSE;
-?>
+//$cfg['ShowAll'] = true;
+
+/**
+ * Number of rows displayed when browsing a result set. If the result
+ * set contains more rows, "Previous" and "Next".
+ * Possible values: 25, 50, 100, 250, 500
+ * default = 25
+ */
+//$cfg['MaxRows'] = 50;
+
+/**
+ * Disallow editing of binary fields
+ * valid values are:
+ *   false    allow editing
+ *   'blob'   allow editing except for BLOB fields
+ *   'noblob' disallow editing except for BLOB fields
+ *   'all'    disallow editing
+ * default = 'blob'
+ */
+//$cfg['ProtectBinary'] = false;
+
+/**
+ * Default language to use, if not browser-defined or user-defined
+ * (you find all languages in the locale folder)
+ * uncomment the desired line:
+ * default = 'en'
+ */
+//$cfg['DefaultLang'] = 'en';
+//$cfg['DefaultLang'] = 'de';
+
+/**
+ * How many columns should be used for table display of a database?
+ * (a value larger than 1 results in some information being hidden)
+ * default = 1
+ */
+//$cfg['PropertiesNumColumns'] = 2;
+
+/**
+ * Set to true if you want DB-based query history.If false, this utilizes
+ * JS-routines to display query history (lost by window close)
+ *
+ * This requires configuration storage enabled, see above.
+ * default = false
+ */
+//$cfg['QueryHistoryDB'] = true;
+
+/**
+ * When using DB-based query history, how many entries should be kept?
+ * default = 25
+ */
+//$cfg['QueryHistoryMax'] = 100;
+
+/**
+ * Whether or not to query the user before sending the error report to
+ * the phpMyAdmin team when a JavaScript error occurs
+ *
+ * Available options
+ * ('ask' | 'always' | 'never')
+ * default = 'ask'
+ */
+//$cfg['SendErrorReports'] = 'always';
+
+/**
+ * You can find more configuration options in the documentation
+ * in the doc/ folder or at <https://docs.phpmyadmin.net/>.
+ */

@@ -8,14 +8,19 @@ RUN		wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-
 RUN		mkdir -p /var/www/phpmyadmin
 RUN     cd /var/www/phpmyadmin
 
+RUN     tar zxvf phpMyAdmin-5.0.2-all-languages.tar.gz
+RUN     mv phpMyAdmin-5.0.2-all-languages/* /var/www/phpmyadmin
+RUN     rm -rf /var/www/phpmyadmin/config.sample.inc.php
+
 COPY	/srcs/start.sh				/
 COPY    /srcs/supervisord.conf  /etc/supervisord.conf
 COPY    /srcs/nginx.conf    /etc/nginx/nginx.conf
 COPY    /srcs/config.inc.php .
 
+RUN     cp config.inc.php /var/www/phpmyadmin/
 RUN     mkdir -p /run/nginx
 RUN     chmod +x start.sh
 
-EXPOSE	5000
-
 CMD sh start.sh
+
+EXPOSE	5000
