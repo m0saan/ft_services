@@ -28,7 +28,7 @@ RUN adduser -D -g 'www' www
 RUN chown -R www:www /var/lib/nginx
 RUN chown -R www:www /www
 
-EXPOSE  80
+EXPOSE  80 443
 VOLUME [ "/sys/fs/cgroup" ]
 
 
