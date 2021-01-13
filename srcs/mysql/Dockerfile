@@ -13,6 +13,6 @@ COPY    srcs/mysql-service.sql .
 RUN     chmod +x build.sh
 VOLUME [ "/sys/fs/cgroup" ]
 
-# EXPOSE 3306
+EXPOSE 3306
 
-ENTRYPOINT sh build.sh
+CMD sh build.sh
