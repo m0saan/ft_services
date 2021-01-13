@@ -6,11 +6,14 @@ RUN openssl req -x509 -nodes -days 365 \
 	-keyout /etc/ssl/private/vsftpd.key \
 	-out /etc/ssl/certs/vsftpd.crt
 
+# We create a new user
+RUN { echo "user"; echo "user"; } | adduser user
+
 COPY srcs/vsftpd.conf /etc/vsftpd.conf
 COPY srcs/run.sh .
 COPY srcs/supervisord.conf /etc/supervisord.conf
 
-EXPOSE 21
+EXPOSE 21 21000
 
 RUN chmod +x run.sh
 

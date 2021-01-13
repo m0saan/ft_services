@@ -1,27 +1,24 @@
 #!/bin/sh
 
-openrc
+rm -rf /var/cache/apk/* /etc/my.cnf*
 
-touch /run/openrc/softlevel
+#create necessary folders
+mkdir -p /var/lib/mysql /run/mysqld
 
-echo "Install modfication.."
-/usr/bin/mysql_install_db
+#install and start services
+mysql_install_db -u root > /dev/null
+exec /usr/bin/mysqld -u root --console &
+sleep 5
 
 
-echo "starting mariadb"
-rc-service mariadb start
+# #create wp db if not already exists
+# if ! mysql -u root -e 'USE wordpress'; then
+# 	mysql -u root -e 'CREATE DATABASE wordpress;'
+# 	# mysql -u root wordpress < /wordpress.sql
+# fi
 
-echo "Apllying DataBase"
+#create db admin
+mysql -u root -e "CREATE USER 'admin'@'%' IDENTIFIED BY 'passwd';GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;USE wordpress;FLUSH PRIVILEGES;"
 
-echo "CREATE DATABASE wordpress;" | mysql -u root
-
-echo "CREATE USER 'root'@'%' identified by 'root';" | mysql -u root
-
-echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'%';" | mysql -u root
-
-echo "FLUSH PRIVILEGES;" | mysql -u root
-
-# mysql -u root wordpress  < mysql-service.sql
-
-# start the MariaDB daemon.
-/usr/bin/mysqld_safe --datadir="/var/lib/mysql"
+#avoid container to stop
+sleep infinity
