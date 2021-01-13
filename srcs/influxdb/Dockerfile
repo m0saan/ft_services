@@ -2,8 +2,7 @@ FROM 	alpine
 
 RUN		apk update && apk add openrc --no-cache && \
 		apk add influxdb && \
-		openrc && touch /run/openrc/softlevel && \
-		rc-update add telegraf
+		openrc && touch /run/openrc/softlevel
 
 COPY	/srcs/start.sh				/
 
