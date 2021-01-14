@@ -1,5 +1,5 @@
 #!/bin/sh
-
+export TELEGRAF_CONFIG_PATH=/etc/telegraf.conf
 # Start Influxdb and telegraf.
-/etc/init.d/telegraf start & influxd
+telegraf & influxd
 
