@@ -12,4 +12,6 @@ VOLUME [ "/sys/fs/cgroup" ]
 
 EXPOSE 3306
 
-ENTRYPOINT sh start.sh
+RUN 	chmod +x start.sh
+
+CMD sh start.sh

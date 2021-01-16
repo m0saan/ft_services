@@ -7,6 +7,9 @@ RUN		apk add php wget php7-fpm phpmyadmin php-mbstring php-gettext  php7-common 
 RUN		wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-all-languages.tar.gz
 RUN		mkdir -p /var/www/phpmyadmin
 RUN     cd /var/www/phpmyadmin
+RUN     mkdir /etc/nginx/ssl
+RUN     chown -R root:root /etc/nginx/ssl
+RUN     chmod 600 /etc/nginx/ssl
 
 RUN     tar zxvf phpMyAdmin-5.0.2-all-languages.tar.gz
 RUN     mv phpMyAdmin-5.0.2-all-languages/* /var/www/phpmyadmin
@@ -16,6 +19,8 @@ COPY	/srcs/start.sh				/
 COPY    /srcs/supervisord.conf  /etc/supervisord.conf
 COPY    /srcs/nginx.conf    /etc/nginx/nginx.conf
 COPY    /srcs/config.inc.php .
+COPY    srcs/localhost.key  /etc/nginx/ssl
+COPY    srcs/localhost.crt  /etc/nginx/ssl
 
 RUN     cp config.inc.php /var/www/phpmyadmin/
 RUN     mkdir -p /run/nginx
