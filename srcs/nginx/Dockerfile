@@ -14,11 +14,12 @@ RUN     chown -R root:root /etc/nginx/ssl
 RUN     chmod 600 /etc/nginx/ssl
 
 COPY    srcs/start.sh      .
-COPY    srcs/supervisord.conf  /etc/supervisord.conf
-COPY    srcs/nginx.conf    /etc/nginx/nginx.conf
-COPY    srcs/index.html    /www/
-COPY    srcs/localhost.key  /etc/nginx/ssl
-COPY    srcs/localhost.crt  /etc/nginx/ssl
+COPY    srcs/supervisord.conf   /etc/supervisord.conf
+COPY    srcs/nginx.conf         /etc/nginx/nginx.conf
+COPY    srcs/ssh_run.sh         /
+COPY    srcs/index.html         /www/
+COPY    srcs/localhost.key      /etc/nginx/ssl
+COPY    srcs/localhost.crt      /etc/nginx/ssl
 
 RUN openrc
 RUN touch /run/openrc/softlevel
