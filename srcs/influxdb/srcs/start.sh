@@ -1,5 +1,4 @@
-#!/bin/sh
-export TELEGRAF_CONFIG_PATH=/etc/telegraf.conf
-# Start Influxdb and telegraf.
-telegraf & influxd
+#! bin/sh
 
+#influxd & telegraf
+supervisord -c /etc/supervisord.conf    & tail -f /dev/null
