@@ -1,0 +1,38 @@
+kind:apiVersion: v1
+kind: Service
+metadata:
+  name: phpMyAdmin-Service
+
+spec:
+  selector:
+    app: phpMyAdmin
+
+  ports:
+  - port: 5000
+  type: LoadBalancer
+
+---
+
+  kind:apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: phpMyAdmin-Depl
+  spec:
+    selector:
+      matchLabels:
+        app: phpMyAdmin-Depl
+    template:
+      metadata:
+        labels:
+          app: phpMyAdmin-Depl
+      spec:
+        containers:
+        - name: phpMyAdmin-Depl
+          image: moboustt/pma
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+          - containerPort: 5000
+  
