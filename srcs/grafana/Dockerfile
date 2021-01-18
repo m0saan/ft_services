@@ -7,7 +7,7 @@ RUN     mkdir -p /etc/telegraf/
 
 COPY	/srcs/start.sh				/
 COPY	/srcs/supervisord.conf		/etc/supervisord.conf
-COPY	/srcs/telegraf.conf		/etc/telegraf/telegraf.conf
+COPY	/srcs/telegraf.conf		    /etc/telegraf/telegraf.conf
 
 WORKDIR	/usr/share/grafana
 
