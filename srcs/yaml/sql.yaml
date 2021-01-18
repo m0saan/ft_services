@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  labels:
+    name: client-pod
+    compoent: web
+spec:
+  containers:
+  - name: client-pod
+    image: moboustt/client-pod
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 3000
