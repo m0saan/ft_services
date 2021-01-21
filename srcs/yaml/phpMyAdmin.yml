@@ -2,14 +2,13 @@ kind:apiVersion: v1
 kind: Service
 metadata:
   name: phpMyAdmin-Service
+
 spec:
   selector:
     app: phpMyAdmin
 
   ports:
-  - protocol: TCP
-    port: 5000
-    targetPort: 5000
+  - port: 5000
   type: LoadBalancer
 
 ---
@@ -18,10 +17,7 @@ spec:
   kind: Deployment
   metadata:
     name: phpMyAdmin-Depl
-    labels:
-      app: phpMyAdmin
   spec:
-    replicas: 1
     selector:
       matchLabels:
         app: phpMyAdmin-Depl
@@ -39,14 +35,4 @@ spec:
               cpu: "500m"
           ports:
           - containerPort: 5000
-          env:
-            - name: PMA_HOST
-              value: mysql-service
-            - name: PMA_PORT
-              value: "3306"
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secrets
-                  key: ROOT_PASSWORD
   
