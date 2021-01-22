@@ -12,6 +12,7 @@ spec:
       port: 5050
       protocol: TCP
       targetPort: 5050
+      nodePort: 31000
   type: LoadBalancer
 
 ---
@@ -37,7 +38,7 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: moboustt/wp
+        image: i_wordpress
         imagePullPolicy: Never
         ports:
         - containerPort: 5050
