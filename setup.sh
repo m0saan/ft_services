@@ -4,10 +4,11 @@
 minikube delete
 killall -TERM kubectl minikube VBoxHeadless
 
-eval $(minikube docker-env)
 
 # Start Minikube
 minikube start --driver=docker
+
+eval $(minikube docker-env)
 
 # Set up Metallb
 
