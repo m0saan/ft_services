@@ -12,7 +12,6 @@ spec:
       port: 5050
       protocol: TCP
       targetPort: 5050
-      nodePort: 31000
   type: LoadBalancer
 
 ---
