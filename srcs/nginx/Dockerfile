@@ -15,7 +15,7 @@ RUN     chmod 600 /etc/nginx/ssl
 
 COPY    srcs/start.sh      .
 COPY    srcs/supervisord.conf   /etc/supervisord.conf
-COPY    srcs/nginx.conf         /etc/nginx/nginx.conf
+COPY    srcs/nginx.conf         /etc/nginx/
 COPY    srcs/ssh_run.sh         /
 COPY    srcs/index.html         /www/
 COPY    srcs/localhost.key      /etc/nginx/ssl
