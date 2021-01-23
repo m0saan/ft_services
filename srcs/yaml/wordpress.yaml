@@ -1,9 +1,11 @@
 apiVersion: v1
 kind: Service
-metadata:
-  name: wordpress
-  labels:
+metadata:                     # Metadata - Meta-information about the object itself
+  name: wordpress             # Service name
+  labels:                     # Define labels for the pod
     app: wordpress
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
 spec:
   selector:
     app: wordpress
@@ -24,20 +26,22 @@ metadata:
     app: wordpress
 
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
+  replicas: 1     # How many pods we want to deploy.
+  selector:       # Which pods are managed by this deployment?
+    matchLabels:  # This matches against the labels we set on the pod!
       app: wordpress
   
-  template:
+  template:       # this template field is a regular pod configuration!
     metadata:
+      # Set labels on the pod.
+      # This is used in the deployment selector.
       labels:
         app: wordpress
     
     spec:
       containers:
-      - name: wordpress
-        image: wordpress-image
-        imagePullPolicy: Never
-        ports:
+      - name: wordpress           # Container name.
+        image: wordpress-image    # Image name.
+        imagePullPolicy: Never    # Tell k8s that we are using a local image.
+        ports:                    # Expose ports.
         - containerPort: 5050
