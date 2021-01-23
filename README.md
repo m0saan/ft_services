@@ -34,8 +34,12 @@ I will be providing some reference materials for you to use as you progress thro
 
 - ```Kubernetes```: Is an open-source system for automating the deployment, scaling, and handling of containerized applications.
 
-- ```Minikube```: Is a tool that lets you run kubernetes locally. minikube runs a single-node kubernetes cluster on your personal computer.
+- ```Minikube```: Is a Kubernetes utility that runs a Kubernetes cluster on your machine.
 
-- ```VirtualBox```: Is virtualization software for x86/amd64 architectures.
+- ``` Kubectl```: is the command line application that lets you interact with your Minikube Kubernetes cluster.
+
+- ```VirtualBox```: Is a generic tool for running virtual machines. It runs other operating systems—Ubuntu, Windows, etc.—inside your host operating system.
 
 - ```Alpine Linux```: Is a Linux distribution based on musl and BusyBox, which aims to be lightweigth and secure by default.
+
+
