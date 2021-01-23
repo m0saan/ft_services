@@ -12,8 +12,12 @@ spec:
       port: 80
       targetPort: 80
       protocol: TCP
-      nodePort: 31000
+    - name: https
+      port: 443
+      targetPort: 443
+      protocol: TCP
   type: LoadBalancer
+
 ---
 
 apiVersion: apps/v1
@@ -41,3 +45,6 @@ spec:
         imagePullPolicy: Never
         ports:
           - containerPort: 80
+            containerPort: 443
+
+
