@@ -5,9 +5,6 @@
 
 * Ft_services will introduce you to Kubernetes. You will discover cluster management and deployment with Kubernetes. You will virtualize a network and do "clustering".
 
-You will discover cluster deployment and management with Kubernetes. Kubernetes is a system for running thousands of containers in an automated, declarative, repeatable, and understandable way. It's how the biggest tech companies in the world run their web services.
-I will be providing some reference materials for you to use as you progress throughout exploring the world of k8s so that you can keep the complete Kubernetes picture in front of you as we cover each individual concept.
-
 ### Components
 
 - ```MetalLB```: Is a Load Balancer that manages external access to its services. It is the only entrance to the cluster.
@@ -42,4 +39,19 @@ I will be providing some reference materials for you to use as you progress thro
 
 - ```Alpine Linux```: Is a Linux distribution based on musl and BusyBox, which aims to be lightweigth and secure by default.
 
+## K8s
+
+#### What Is k8s (Kubernetes):
+
+Kubernetes is a container orchestration system—it automates the deployment and scaling of containers. Kubernetes' responsibility is to manage hundreds of containers across many computers. It takes control of their uptime, networking, storage,
+and scheduling. When it needs to actually run a container, Kubernetes leaves that responsibility to the container runtime. The most popular container runtime is Docker, which is what we use in this book, but Kubernetes also supports other container runtimes like rkt and containerd.
+
+#### Interacting with Kubernetes
+
+To interact with a Kubernetes cluster, you use the command line tool kubectl. This program—which you install when you set up your development environment before using Kubernetes—makes requests to the Kubernetes cluster to manipulate the state of what's running on your cluster.
+
+
+### Pods
+
+A pod contains one or more containers, and all the containers in a pod are guaranteed to run on the same machine in the Kubernetes cluster. Containers in a pod share their networking infrastructure, their storage resources, and their lifecycle.
 
