@@ -1,7 +1,11 @@
+# Services let you define networking rules for pods based on their labels.
+# Whenever a pod with a matching label appears in the Kubernetes cluster,
+# the service will detect it and start using it to handle network requests made to the service.
+
 apiVersion: v1
 kind: Service
 metadata:                     # Metadata - Meta-information about the object itself
-  name: wordpress             # Service name
+  name: wordpress-service     # Service name
   labels:                     # Define labels for the pod
     app: wordpress
   annotations:
@@ -9,19 +13,20 @@ metadata:                     # Metadata - Meta-information about the object its
 spec:
   selector:
     app: wordpress
-  ports:
+  ports:                  # Two types of ports for a service
     - name: wordpress
-      port: 5050
+      port: 5050          # - port exposed internally in the cluster
+      targetPort: 5050    # - the container port to send requests to
       protocol: TCP
-      targetPort: 5050
   type: LoadBalancer
 
 ---
 
+# A deployment is responsible for keeping a set of pods running.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress
+  name: wordpress-deployment
   labels:
     app: wordpress
 
