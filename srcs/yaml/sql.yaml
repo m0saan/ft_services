@@ -9,8 +9,9 @@ spec:
   selector:
     app: mysql
   ports:
-    port: 3306
-    tagretPort: 3306
+    - name: mysql
+      port: 3306
+      targetPort: 3306
 
 ---
 
@@ -24,7 +25,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      labels: app
+      app: mysql
   template:
     metadata:
       labels:
@@ -35,7 +36,7 @@ spec:
           image: mysql-image
           imagePullPolicy: Never
           ports:
-            containerPort: 3306
+            - containerPort: 3306
             # Now, one of our containers can mount this volume
             # and use it like any other directory.
           volumeMounts:
@@ -62,7 +63,7 @@ metadata:
   name: mysql-pvc
 spec:
   # The list of ways the persistent volume can be mounted
-  accessMode:
+  accessModes:
     - ReadWriteOnce
       # "Give me a persistent volume with at least
       # 256MB of space where I can read and write."
