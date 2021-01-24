@@ -36,9 +36,13 @@ spec:
           imagePullPolicy: Never
           ports:
             containerPort: 3306
+            # Now, one of our containers can mount this volume
+            # and use it like any other directory.
           volumeMounts:
-            - name: mysql
-              mountPath: /var/lib/mysql
+            - name: mysql                 # name must match the volume name set at the pod level.
+              mountPath: /var/lib/mysql   # Where to mount this directory in our container.
+      # Volumes are declared at the pod level. They share its
+      # lifecycle and are communal across containers inside it.
       volumes:
         - name: mysql
           persistentVolumeClaim:
@@ -46,13 +50,22 @@ spec:
 
 ---
 
+
+# Declares a persistent volume is available for 
+# pods to use as a long-term storage solution.
+# This persistent volume is backed by your local
+# minikube cluster.
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: mysql-pvc
 spec:
+  # The list of ways the persistent volume can be mounted
   accessMode:
     - ReadWriteOnce
+      # "Give me a persistent volume with at least
+      # 256MB of space where I can read and write."
   resources:
     requests:
-      storage: 1.0Gi
+      storage: 256M
