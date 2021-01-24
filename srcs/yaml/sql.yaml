@@ -1,17 +1,58 @@
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
-  name: client-pod
+  name: mysql-service
   labels:
-    name: client-pod
-    compoent: web
+    app: mysql
 spec:
-  containers:
-  - name: client-pod
-    image: moboustt/client-pod
-    resources:
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
-    ports:
-      - containerPort: 3000
+  type: ClusterIP
+  selector:
+    app: mysql
+  ports:
+    port: 3306
+    tagretPort: 3306
+
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mysql-deployment
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      labels: app
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql-image
+          imagePullPolicy: Never
+          ports:
+            containerPort: 3306
+          volumeMounts:
+            - name: mysql
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mysql-pvc
+spec:
+  accessMode:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1.0Gi
