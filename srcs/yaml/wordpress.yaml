@@ -32,7 +32,8 @@ metadata:
 
 spec:
   replicas: 1     # How many pods we want to deploy.
-  selector:       # Which pods are managed by this deployment?
+                  # Equivalent to "select any pod where the label app = wordpress"
+  selector:
     matchLabels:  # This matches against the labels we set on the pod!
       app: wordpress
   
