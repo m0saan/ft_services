@@ -6,7 +6,7 @@ killall -TERM kubectl minikube VBoxHeadless
 
 
 # Start Minikube
-minikube start --driver=virtualbox
+minikube start --driver=hyperkit
 
 # Set up Metallb
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
