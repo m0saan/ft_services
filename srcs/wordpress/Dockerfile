@@ -11,7 +11,7 @@ RUN     mkdir /etc/nginx/ssl
 RUN     chown -R root:root /etc/nginx/ssl
 RUN     chmod 600 /etc/nginx/ssl
 
-#COPY	/srcs/wp-config.php			/var/www/wordpress/
+COPY	/srcs/wp-config.php			/var/www/wordpress/
 COPY	/srcs/start.sh				/
 COPY    /srcs/supervisord.conf /etc/supervisord.conf
 COPY    /srcs/nginx.conf    /etc/nginx/nginx.conf
