@@ -10,9 +10,9 @@ RUN     mkdir /etc/nginx/ssl
 RUN     chown -R root:root /etc/nginx/ssl
 RUN     chmod 600 /etc/nginx/ssl
 
-COPY    srcs/phpMyAdmin-5.0.2-all-languages.tar.gz /
-RUN     tar zxvf phpMyAdmin-5.0.2-all-languages.tar.gz
-RUN     mv phpMyAdmin-5.0.2-all-languages/* /var/www/phpmyadmin
+COPY    srcs/phpMyAdmin-5.0.4-english.tar.gz /
+RUN     tar zxvf phpMyAdmin-5.0.4-english.tar.gz
+RUN     mv phpMyAdmin-5.0.4-english/* /var/www/phpmyadmin
 RUN     rm -rf /var/www/phpmyadmin/config.sample.inc.php
 
 COPY	/srcs/start.sh				/

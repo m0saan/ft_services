@@ -69,11 +69,12 @@ $cfg['Servers'][$i]['AllowNoPassword'] = false;
  * End of servers configuration
  */
 
-/**
+/*
  * Directories for saving/loading files from server
  */
 $cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';
+$cfg['TempDir'] = '/tmp';
 
 /**
  * Whether to display icons or text or both icons and text in table row
