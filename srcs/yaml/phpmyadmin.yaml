@@ -13,6 +13,7 @@ spec:
   - port: 5000
     name: phpmyadmin
   type: LoadBalancer
+  loadBalancerIP: 192.168.99.124
 
 ---
 
