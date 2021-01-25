@@ -16,8 +16,10 @@ sleep 5
 
 mysql -u root -e 'CREATE DATABASE wordpress;'
 
-#create db admin
-mysql -u root -e "CREATE USER 'root'@'%' IDENTIFIED BY 'root';GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;USE wordpress;FLUSH PRIVILEGES;"
+
+# create db admin
+mysql -u root -e "CREATE USER 'admin'@'%' IDENTIFIED BY 'admin';GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;USE wordpress;FLUSH PRIVILEGES;"
+
 mysql -u root wordpress < /wordpress.sql
 
 #make sure container not to stop
