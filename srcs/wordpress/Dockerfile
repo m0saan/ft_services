@@ -10,7 +10,10 @@ RUN		mkdir -p /var/www && mv /wordpress /var/www/
 RUN     mkdir /etc/nginx/ssl
 RUN     chown -R root:root /etc/nginx/ssl
 RUN     chmod 600 /etc/nginx/ssl
+RUN     apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
+RUN     mkdir -p /etc/telegraf
 
+COPY     /srcs/telegraf.conf /etc/telegraf/
 COPY	/srcs/wp-config.php			/var/www/wordpress/
 COPY	/srcs/start.sh				/
 COPY    /srcs/supervisord.conf /etc/supervisord.conf
