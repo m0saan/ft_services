@@ -7,10 +7,10 @@ RUN		apk add wget php7 php7-fpm php7-mysqli php7-mbstring php7-json php7-session
 RUN		mkdir -p /usr/share/webapps/ && cd /usr/share/webapps/
 RUN		wget https://wordpress.org/wordpress-5.6.tar.gz && tar -xzvf wordpress-5.6.tar.gz && rm wordpress-5.6.tar.gz
 RUN		mkdir -p /var/www && mv /wordpress /var/www/
+RUN     apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 RUN     mkdir /etc/nginx/ssl
 RUN     chown -R root:root /etc/nginx/ssl
 RUN     chmod 600 /etc/nginx/ssl
-RUN     apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
 RUN     mkdir -p /etc/telegraf
 
 COPY     /srcs/telegraf.conf /etc/telegraf/
