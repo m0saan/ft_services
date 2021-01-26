@@ -1,0 +1,59 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: unique-ip
+  name: influxdb-service
+  labels:
+    app: influxdb
+
+spec:
+  selector:
+    app: influxdb
+  type: LoadBalancer
+  ports:
+    - name: influxdb
+      port: 8086
+      targetPort: 8086
+
+---
+
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: influxdb-deployment
+  labels:
+    app: influxdb
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+        - name: influxdb
+          image: influxdb-image
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8086
+
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: influxdb-volume
+spec:
+  capacity:
+    storage: 512M
+  accessMode:
+    - ReadWriteOnce
