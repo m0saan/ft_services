@@ -9,7 +9,7 @@ metadata:                     # Metadata - Meta-information about the object its
   labels:                     # Define labels for the pod
     app: wordpress
   annotations:
-    metallb.universe.tf/allow-shared-ip: shared
+    metallb.universe.tf/allow-shared-ip: unique-ip
 spec:
   selector:
     app: wordpress
