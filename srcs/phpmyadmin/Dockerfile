@@ -14,7 +14,7 @@ COPY    srcs/phpMyAdmin-5.0.4-english.tar.gz /
 RUN     tar zxvf phpMyAdmin-5.0.4-english.tar.gz
 RUN     mv phpMyAdmin-5.0.4-english/* /var/www/phpmyadmin
 RUN     rm -rf /var/www/phpmyadmin/config.sample.inc.php
-RUN     apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
+RUN     apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 RUN     mkdir -p /etc/telegraf
 
 
