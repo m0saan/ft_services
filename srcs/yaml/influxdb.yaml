@@ -38,22 +38,31 @@ spec:
       labels:
         app: influxdb
     spec:
+      volumes:
+        - name: influxdb-volume
+          persistentVolumeClaim:
+            claimName: influxdb-pvc
+
       containers:
         - name: influxdb
           image: influxdb-image
           imagePullPolicy: Never
           ports:
             - containerPort: 8086
+          volumeMounts:
+            - name: influxdb-volume
+              mountPath: /var/lib/influxdb
 
-
+ 
 ---
 
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: influxdb-volume
+  name: influxdb-pvc
 spec:
-  capacity:
-    storage: 512M
-  accessMode:
+  resources:
+    requests:
+      storage: 512M
+  accessModes:
     - ReadWriteOnce
