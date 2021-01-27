@@ -22,5 +22,9 @@ mysql -u root -e "CREATE USER 'admin'@'%' IDENTIFIED BY 'admin';GRANT ALL PRIVIL
 
 mysql -u root wordpress < /wordpress.sql
 
+# start telegraf
+
+telegraf
+
 #make sure container not to stop
 sleep infinity
