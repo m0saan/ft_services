@@ -1,15 +1,18 @@
 #!bin/bash
 
-# Delete And Kill Currently Working Processes
-
+GREEN='\e[0;32m'
+YELLOW='\e[0;33m'
+END='\e[0;0m'
+    
 tput bold; echo "----------------Deleting currently working processes----------------"
 minikube delete
 killall -TERM kubectl minikube VBoxHeadless
 
 
 tput bold; echo "--------------------------Starting Minikube-------------------------"
-minikube start --driver=virtualbox
+minikube start --driver=hyperkit
 eval $(minikube docker-env)
+minikube dashboard &
 
 
 # Build Docker Images
@@ -29,7 +32,7 @@ tput bold; echo "--------------------------Building GRAFANA---------------------
 docker build -t grafana-image srcs/grafana
 tput bold; echo "--------------------------Building INFLUXDB--------------------------"
 docker build -t influxdb-image srcs/influxdb
-echo "${BLUE}Docker build completed${END}"
+echo "${YELLOW}Docker build completed${END}"
 
 # Set up Metallb
 echo "${GREEN}Start setting up Deployments${END}"
@@ -56,5 +59,5 @@ kubectl apply -f srcs/yaml/grafana.yaml
 tput bold; echo "--------------------------Feeding influxdb.yaml to kubectl------------"
 kubectl apply -f srcs/yaml/influxdb.yaml
 
-echo "${GREEN}Completed setting up Deployments${END}"
+echo "${YELLOW}Completed setting up Deployments${END}"
 
