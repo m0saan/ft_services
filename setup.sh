@@ -17,7 +17,7 @@ killall -TERM kubectl minikube VBoxHeadless
 
 
 printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Starting Minikube---------------------------${normal}"
-minikube start --driver=hyperkit
+minikube start --driver=virtualbox
 eval $(minikube docker-env)
 
 printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Strating Minikube Dashboard-----------------${normal}" $COLOR_REST
@@ -42,12 +42,12 @@ docker build -t grafana-image srcs/grafana
 printf '%s%s%s\n' $COLOR_BLUE "--------------------------Building INFLUXDB--------------------------" $COLOR_REST && sleep 0.5
 docker build -t influxdb-image srcs/influxdb
 
-printf $COLOR_YELLOW "${bold}----------------------------Images built completed-----------------------${normal}" $COLOR_REST
+printf '%s%s%s\n' $COLOR_YELLOW "${bold}----------------------------Images built completed-----------------------${normal}" $COLOR_REST
 
 # Set up Metallb
-printf $COLOR_GREEN "${bold}-----------------------------Start setting up Deployments-----------------${normal}" $COLOR_REST && sleep 0.5
+printf '%s%s%s\n' $COLOR_GREEN "${bold}-----------------------------Start setting up Deployments-----------------${normal}" $COLOR_REST && sleep 0.5
 
-printf $COLOR_GREEN "${bold}-----------------------------Setting up MetalLb---------------------------${normal}" $COLOR_REST && sleep 0.5
+printf '%s%s%s\n'  $COLOR_GREEN "${bold}-----------------------------Setting up MetalLb---------------------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
@@ -69,5 +69,6 @@ kubectl apply -f srcs/yaml/grafana.yaml
 printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding influxdb.yaml to kubectl------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/influxdb.yaml
 
-printf $COLOR_YELLOW 'Completed setting up Deployments' $COLOR_REST
+printf '%s%s%s\n' $COLOR_YELLOW 'Completed setting up Deployments' $COLOR_REST
+printf '%s%s\n' $COLOR_GREEN "DONE.\n"
 
