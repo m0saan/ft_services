@@ -1,62 +1,67 @@
 #!bin/bash
 
-GREEN='\e[0;32m'
-YELLOW='\e[0;33m'
-END='\e[0;0m'
+COLOR_REST="$(tput sgr0)"
+COLOR_GREEN="$(tput setaf 2)"
+COLOR_YELLOW="$(tput setaf 3)"
     
-tput bold; echo "----------------Deleting currently working processes----------------"
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+printf '%s%s%s\n' $COLOR_GREEN 'Start building images' $COLOR_REST
+echo "${bold}----------------Deleting currently working processes----------------${normal}"
+
 minikube delete
 killall -TERM kubectl minikube VBoxHeadless
 
 
-tput bold; echo "--------------------------Starting Minikube-------------------------"
+echo "${bold}----------------Starting Minikube-----------------------------------${normal}"
 minikube start --driver=hyperkit
 eval $(minikube docker-env)
 minikube dashboard &
 
 
 # Build Docker Images
-
-echo "${GREEN}Start building images${END}"
-tput bold; echo "--------------------------Building WORDPRESS-------------------------"
+printf '%s%s%s\n' $COLOR_GREEN 'Start building images' $COLOR_REST'
+echo "${bold}--------------------------Building WORDPRESS-------------------------${normal}"
 docker build -t wordpress-image srcs/wordpress
-tput bold; echo "--------------------------Building NGINX-----------------------------"
+echo "${bold}--------------------------Building NGINX-----------------------------${normal}"
 docker build -t nginx-image srcs/nginx
-tput bold; echo "--------------------------Building PHPMYADMIN------------------------"
+echo "${bold}--------------------------Building PHPMYADMIN------------------------${normal}"
 docker build -t phpmyadmin-image srcs/phpmyadmin
-tput bold; echo "--------------------------Building MYSQL-----------------------------"
+echo "${bold}--------------------------Building MYSQL-----------------------------${normal}"
 docker build -t mysql-image srcs/mysql
-tput bold; echo "--------------------------Building FTPS------------------------------"
+echo "${bold}--------------------------Building FTPS------------------------------${normal}"
 docker build -t ftps-image srcs/ftps
-tput bold; echo "--------------------------Building GRAFANA---------------------------"
+echo "${bold}--------------------------Building GRAFANA---------------------------${normal}"
 docker build -t grafana-image srcs/grafana
-tput bold; echo "--------------------------Building INFLUXDB--------------------------"
+echo "${bold}--------------------------Building INFLUXDB--------------------------${normal}"
 docker build -t influxdb-image srcs/influxdb
 echo "${YELLOW}Docker build completed${END}"
 
 # Set up Metallb
 echo "${GREEN}Start setting up Deployments${END}"
 
-tput bold; echo "--------------------------Setting up MetalLb-------------------------"
+echo "${bold}--------------------------Setting up MetalLb-------------------------${normal}"
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 
-tput bold; echo "--------------------------Feeding MetalLb.yaml to kubectl------------"
+echo "${bold}--------------------------Feeding MetalLb.yaml to kubectl------------${normal}"
 kubectl apply -f srcs/yaml/metalLb.yaml
-tput bold; echo "--------------------------Feeding wordpress.yaml to kubectl------------"
+echo "${bold}--------------------------Feeding wordpress.yaml to kubectl-----------${normal}"
 kubectl apply -f srcs/yaml/wordpress
-tput bold; echo "--------------------------Feeding nginx.yaml to kubectl------------"
+echo "${bold}--------------------------Feeding nginx.yaml to kubectl---------------${normal}"
 kubectl apply -f srcs/yaml/nginx.yaml
-tput bold; echo "--------------------------Feeding phpmyadmin.yaml to kubectl------------"
+echo "${bold}--------------------------Feeding phpmyadmin.yaml to kubectl----------${normal}"
 kubectl apply -f srcs/yaml/phpmyadmin.yaml
-tput bold; echo "--------------------------Feeding sql.yaml to kubectl------------"
+echo "${bold}--------------------------Feeding sql.yaml to kubectl-----------------${normal}"
 kubectl apply -f srcs/yaml/sql.yaml
-tput bold; echo "--------------------------Feeding ftps.yaml to kubectl------------"
+echo "${bold}--------------------------Feeding ftps.yaml to kubectl----------------${normal}"
 kubectl apply -f srcs/yaml/ftps.yaml
-tput bold; echo "--------------------------Feeding grafana.yaml to kubectl------------"
+echo "${bold}--------------------------Feeding grafana.yaml to kubectl-------------${normal}"
 kubectl apply -f srcs/yaml/grafana.yaml
-tput bold; echo "--------------------------Feeding influxdb.yaml to kubectl------------"
+echo "${bold}--------------------------Feeding influxdb.yaml to kubectl------------${normal}"
 kubectl apply -f srcs/yaml/influxdb.yaml
 
 echo "${YELLOW}Completed setting up Deployments${END}"
