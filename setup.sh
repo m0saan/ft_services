@@ -22,7 +22,7 @@ eval $(minikube docker-env)
 
 printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Strating Minikube Dashboard-----------------${normal}" $COLOR_REST
 minikube dashboard &
-
+echo "Loading minikube dashboard\n"
 
 # Build Docker Images
 printf '%s%s%s\n' $COLOR_GREEN "${bold}------------------Start building images------------------------${normal}" $COLOR_REST && sleep 0.5
