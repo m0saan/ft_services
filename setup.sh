@@ -19,8 +19,8 @@ kubectl apply -f srcs/yaml/metalLb.yaml
 eval $(minikube docker-env)
 
 # Build Docker Images
-docker build -t wordpress-image srcs/wordpress
-docker build -t nginx-image srcs/nginx
-docker build -t phpmyadmin-image srcs/phpmyadmin
-docker build -t mysql-image srcs/mysql
+#docker build -t wordpress-image srcs/wordpress
+#docker build -t nginx-image srcs/nginx
+#docker build -t phpmyadmin-image srcs/phpmyadmin
+#docker build -t mysql-image srcs/mysql
 
