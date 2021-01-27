@@ -1,45 +1,48 @@
 #!bin/bash
 
+# Colors
 COLOR_REST="$(tput sgr0)"
 COLOR_GREEN="$(tput setaf 2)"
 COLOR_YELLOW="$(tput setaf 3)"
 COLOR_BLUE="$(tput setaf 4)"
     
 
+# Text style
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-echo "${bold}----------------Deleting currently working processes----------------${normal}"
-
+printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Deleting currently working processes----------------${normal}" $COLOR_REST
 minikube delete
 killall -TERM kubectl minikube VBoxHeadless
 
 
-echo "${bold}----------------Starting Minikube-----------------------------------${normal}"
+printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Starting Minikube-----------------------------------${normal}"
 minikube start --driver=hyperkit
 eval $(minikube docker-env)
+
+printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Strating Minikube Dashboard-------------------------${normal}" $COLOR_REST
 minikube dashboard &
 
 
 # Build Docker Images
-printf '%s%s%s\n' $COLOR_GREEN 'Start building images' $COLOR_REST
+printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Start building images------------------------${normal}" $COLOR_REST
 
-printf '%s%s%s\n' $COLOR_BLUE "${bold}---------------------------Building WORDPRESS-------------------------${normal}" $COLOR_REST
+printf '%s%s%s\n' $COLOR_BLUE "---------------------------Building WORDPRESS-------------------------" $COLOR_REST
 docker build -t wordpress-image srcs/wordpress
-eprintf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Building NGINX-----------------------------${normal}" $COLOR_REST
+printf '%s%s%s\n' $COLOR_BLUE "--------------------------Building NGINX-----------------------------" $COLOR_REST
 docker build -t nginx-image srcs/nginx
-eprintf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Building PHPMYADMIN------------------------${normal}" $COLOR_REST
+printf '%s%s%s\n' $COLOR_BLUE "--------------------------Building PHPMYADMIN------------------------" $COLOR_REST
 docker build -t phpmyadmin-image srcs/phpmyadmin
-eprintf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Building MYSQL-----------------------------${normal}" $COLOR_REST
+printf '%s%s%s\n' $COLOR_BLUE "--------------------------Building MYSQL-----------------------------" $COLOR_REST
 docker build -t mysql-image srcs/mysql
-eprintf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Building FTPS------------------------------${normal}" $COLOR_REST
+printf '%s%s%s\n' $COLOR_BLUE "--------------------------Building FTPS------------------------------" $COLOR_REST
 docker build -t ftps-image srcs/ftps
-eprintf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Building GRAFANA---------------------------${normal}" $COLOR_REST
+printf '%s%s%s\n' $COLOR_BLUE "--------------------------Building GRAFANA---------------------------" $COLOR_REST
 docker build -t grafana-image srcs/grafana
-eprintf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Building INFLUXDB--------------------------${normal}" $COLOR_REST
+printf '%s%s%s\n' $COLOR_BLUE "--------------------------Building INFLUXDB--------------------------" $COLOR_REST
 docker build -t influxdb-image srcs/influxdb
 
-printf $COLOR_YELLOW 'Docker build completed' $COLOR_REST
+printf $COLOR_YELLOW '------------------------------------Docker build completed---------------------' $COLOR_REST
 
 # Set up Metallb
 printf $COLOR_GREEN 'Start setting up Deployments' $COLOR_REST
