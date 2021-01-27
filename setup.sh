@@ -55,7 +55,7 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding MetalLb.yaml to kubectl------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/metalLb.yaml
 printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding wordpress.yaml to kubectl-----------${normal}" $COLOR_REST && sleep 0.5
-kubectl apply -f srcs/yaml/wordpress
+kubectl apply -f srcs/yaml/wordpress.yaml
 printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding nginx.yaml to kubectl---------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/nginx.yaml
 printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding phpmyadmin.yaml to kubectl----------${normal}" $COLOR_REST && sleep 0.5
