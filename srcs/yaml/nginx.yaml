@@ -18,6 +18,10 @@ spec:
       port: 443
       targetPort: 443
       protocol: TCP
+    - name: ssh
+      port: 22
+      targetPort: 22
+      protocol: TCP
   type: LoadBalancer
 
 ---
@@ -48,5 +52,6 @@ spec:
         ports:
           - containerPort: 80
             containerPort: 443
+            containerPort: 22
 
 
