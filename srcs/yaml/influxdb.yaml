@@ -2,8 +2,6 @@ kind: Service
 apiVersion: v1
 
 metadata:
-  annotations:
-    metallb.universe.tf/allow-shared-ip: unique-ip
   name: influxdb-service
   labels:
     app: influxdb
@@ -11,7 +9,7 @@ metadata:
 spec:
   selector:
     app: influxdb
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - name: influxdb
       port: 8086
