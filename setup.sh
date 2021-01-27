@@ -52,21 +52,21 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manife
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 
-printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding MetalLb.yaml to kubectl------------${normal}" $COLOR_REST && sleep 0.5
+printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding MetalLb.yaml to kubectl-------------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/metalLb.yaml
-printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding wordpress.yaml to kubectl-----------${normal}" $COLOR_REST && sleep 0.5
+printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding wordpress.yaml to kubectl-----------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/wordpress.yaml
-printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding nginx.yaml to kubectl---------------${normal}" $COLOR_REST && sleep 0.5
+printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding nginx.yaml to kubectl---------------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/nginx.yaml
-printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding phpmyadmin.yaml to kubectl----------${normal}" $COLOR_REST && sleep 0.5
+printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding phpmyadmin.yaml to kubectl----------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/phpmyadmin.yaml
-printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding sql.yaml to kubectl-----------------${normal}" $COLOR_REST && sleep 0.5
+printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding sql.yaml to kubectl-----------------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/sql.yaml
-printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding ftps.yaml to kubectl----------------${normal}" $COLOR_REST && sleep 0.5
+printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding ftps.yaml to kubectl----------------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/ftps.yaml
-printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding grafana.yaml to kubectl-------------${normal}" $COLOR_REST && sleep 0.5
+printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding grafana.yaml to kubectl-------------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/grafana.yaml
-printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding influxdb.yaml to kubectl------------${normal}" $COLOR_REST && sleep 0.5
+printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding influxdb.yaml to kubectl------------------${normal}" $COLOR_REST && sleep 0.5
 kubectl apply -f srcs/yaml/influxdb.yaml
 
 printf '%s%s%s\n' $COLOR_YELLOW 'Completed setting up Deployments' $COLOR_REST
