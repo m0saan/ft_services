@@ -15,7 +15,6 @@ spec:
       targetPort: 21
   type: LoadBalancer
 
-
 ---
 
 kind: Deployment
@@ -31,14 +30,14 @@ spec:
     matchLabels:
       app: ftps
 
-      template:
-        metadata:
-          labels:
-            app: ftps
-      spec:
-        containers:
-          - name: ftps
-            image: ftps-image
-            imagePullPolicy: Never
-            ports:
-              - containerPort: 21
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      containers:
+        - name: ftps
+          image: ftps-image
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 21
