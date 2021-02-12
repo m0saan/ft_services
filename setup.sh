@@ -17,7 +17,7 @@ killall -TERM kubectl minikube VBoxHeadless
 
 
 printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Starting Minikube---------------------------${normal}"
-minikube start --driver=virtualbox
+minikube start --driver=virtualbox --memory=4096
 eval $(minikube docker-env)
 
 printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Strating Minikube Dashboard-----------------${normal}" $COLOR_REST
@@ -48,8 +48,8 @@ printf '%s%s%s\n' $COLOR_YELLOW "${bold}----------------------------Images built
 printf '%s%s%s\n' $COLOR_GREEN "${bold}-----------------------------Start setting up Deployments-----------------${normal}" $COLOR_REST && sleep 0.5
 
 printf '%s%s%s\n'  $COLOR_GREEN "${bold}-----------------------------Setting up MetalLb---------------------------${normal}" $COLOR_REST && sleep 0.5
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 
 printf '%s%s%s\n' $COLOR_BLUE "${bold}--------------------------Feeding MetalLb.yaml to kubectl-------------------${normal}" $COLOR_REST && sleep 0.5
