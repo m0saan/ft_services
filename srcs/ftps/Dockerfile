@@ -1,12 +1,13 @@
 FROM    alpine:3.11
 RUN     apk update
-RUN     apk add vsftpd openrc supervisor openssl && \
-	    echo "root:toor" | chpasswd
+RUN     apk add vsftpd openrc supervisor openssl
 RUN     apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 RUN     mkdir -p /etc/telegraf
 
+RUN yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem
+
 # We create a new user
-RUN     { echo "user"; echo "user"; } | adduser user
+RUN     adduser -D user && echo "user:password" | chpasswd
 
 COPY    srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY    srcs/run.sh /
