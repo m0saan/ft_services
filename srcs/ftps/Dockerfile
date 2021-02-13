@@ -8,12 +8,12 @@ RUN     mkdir -p /etc/telegraf
 # We create a new user
 RUN     { echo "user"; echo "user"; } | adduser user
 
-COPY    srcs/vsftpd.conf /etc/vsftpd.conf
-COPY    srcs/run.sh .
+COPY    srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY    srcs/run.sh /
 COPY    srcs/supervisord.conf /etc/supervisord.conf
 COPY    srcs/telegraf.conf /etc/telegraf/
 
-EXPOSE  21 21000
+EXPOSE  21
 
 RUN     chmod +x run.sh
 
