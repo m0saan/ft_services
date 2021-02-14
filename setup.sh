@@ -17,7 +17,7 @@ killall -TERM kubectl minikube VBoxHeadless
 
 
 printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Starting Minikube---------------------------${normal}"
-minikube start --driver=virtualbox --memory=4096
+minikube start --driver=virtualbox --memory=3072
 eval $(minikube docker-env)
 
 printf '%s%s%s\n' $COLOR_GREEN "${bold}-------------------Strating Minikube Dashboard-----------------${normal}" $COLOR_REST
