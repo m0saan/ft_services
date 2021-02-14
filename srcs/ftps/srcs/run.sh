@@ -1,1 +1,1 @@
-supervisord -c /etc/supervisord.conf
+service vsftpd start

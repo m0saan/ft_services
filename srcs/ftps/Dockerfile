@@ -6,7 +6,7 @@ RUN     mkdir -p /etc/telegraf
 
 RUN yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem
 
-# We create a new user
+# We create a user
 RUN     adduser -D user && echo "user:password" | chpasswd
 
 COPY    srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
@@ -14,8 +14,7 @@ COPY    srcs/run.sh /
 COPY    srcs/supervisord.conf /etc/supervisord.conf
 COPY    srcs/telegraf.conf /etc/telegraf/
 
-EXPOSE  21
-
+RUN     mkdir -p /run/openrc/ && touch /run/openrc/softlevel
 RUN     chmod +x run.sh
 
-CMD     sh run.sh
+CMD     ["supervisord", "-c", "/etc/supervisord.conf"]
