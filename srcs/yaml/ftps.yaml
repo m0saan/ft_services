@@ -13,6 +13,15 @@ spec:
     - name: ftps
       port: 21
       targetPort: 21
+    - name: data
+      port: 20
+      targetPort: 20
+    - name: min
+      port: 30020
+      targetPort: 30020
+    - name: max
+      port: 30021
+      targetPort: 30021
   type: LoadBalancer
 
 ---
@@ -40,4 +49,7 @@ spec:
           image: ftps-image
           imagePullPolicy: Never
           ports:
+            - containerPort: 20
             - containerPort: 21
+            - containerPort: 30020
+            - containerPort: 30021
