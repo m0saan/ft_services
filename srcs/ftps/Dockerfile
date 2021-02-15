@@ -17,4 +17,6 @@ COPY    srcs/telegraf.conf /etc/telegraf/
 RUN     mkdir -p /run/openrc/ && touch /run/openrc/softlevel
 RUN     chmod +x run.sh
 
-CMD     ["supervisord", "-c", "/etc/supervisord.conf"]
+EXPOSE 21 30020 30021
+
+CMD     sh run.sh
