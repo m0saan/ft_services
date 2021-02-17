@@ -53,3 +53,10 @@ spec:
             - containerPort: 21
             - containerPort: 30020
             - containerPort: 30021
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - health.sh
+            initialDelaySeconds: 5
+            periodSeconds: 1

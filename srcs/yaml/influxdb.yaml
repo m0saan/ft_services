@@ -50,6 +50,13 @@ spec:
           volumeMounts:
             - name: influxdb-volume
               mountPath: /root/.influxdb
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - health.sh
+            initialDelaySeconds: 5
+            periodSeconds: 1
 
  
 ---

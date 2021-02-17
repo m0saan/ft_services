@@ -51,3 +51,10 @@ spec:
         imagePullPolicy: Never    # Tell k8s that we are using a local image.
         ports:                    # Expose ports.
         - containerPort: 5050
+        livenessProbe:
+          exec:
+            command:
+              - sh
+              - health.sh
+          initialDelaySeconds: 5
+          periodSeconds: 1

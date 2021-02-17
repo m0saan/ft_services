@@ -43,6 +43,14 @@ spec:
           volumeMounts:
             - name: mysql                 # name must match the volume name set at the pod level.
               mountPath: /var/lib/mysql   # Where to mount this directory in our container.
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - health.sh
+            initialDelaySeconds: 5
+            periodSeconds: 1
+
       # Volumes are declared at the pod level. They share its
       # lifecycle and are communal across containers inside it.
       volumes:
