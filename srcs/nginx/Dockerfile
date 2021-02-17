@@ -25,6 +25,7 @@ COPY    srcs/ssh_run.sh         /
 COPY    srcs/index.html         /www/
 COPY    srcs/localhost.key      /etc/nginx/ssl
 COPY    srcs/localhost.crt      /etc/nginx/ssl
+COPY    srcs/health.sh          /
 
 RUN openrc
 RUN touch /run/openrc/softlevel
