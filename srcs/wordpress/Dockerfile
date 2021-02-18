@@ -13,15 +13,15 @@ RUN     chown -R root:root /etc/nginx/ssl
 RUN     chmod 600 /etc/nginx/ssl
 RUN     mkdir -p /etc/telegraf
 
-COPY     /srcs/telegraf.conf /etc/telegraf/
-COPY	/srcs/wp-config.php			/var/www/wordpress/
-COPY	/srcs/start.sh				/
-COPY    /srcs/supervisord.conf /etc/supervisord.conf
-COPY    /srcs/nginx.conf    /etc/nginx/nginx.conf
-COPY    /srcs/default.conf    /etc/nginx/conf.d/
-COPY    srcs/localhost.key  /etc/nginx/ssl
-COPY    srcs/localhost.crt  /etc/nginx/ssl
-
+COPY    srcs/telegraf.conf        /etc/telegraf/
+COPY	srcs/wp-config.php			/var/www/wordpress/
+COPY	srcs/start.sh				/
+COPY    srcs/supervisord.conf       /etc/supervisord.conf
+COPY    srcs/nginx.conf             /etc/nginx/nginx.conf
+COPY    srcs/default.conf           /etc/nginx/conf.d/
+COPY    srcs/localhost.key          /etc/nginx/ssl
+COPY    srcs/localhost.crt          /etc/nginx/ssl
+COPY    srcs/health.sh              /
 EXPOSE	5050
 
 RUN mkdir -p /run/nginx

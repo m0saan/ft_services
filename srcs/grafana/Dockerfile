@@ -4,10 +4,11 @@ RUN     apk add supervisor libc6-compat
 RUN     apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 RUN     mkdir -p /etc/telegraf/
 
-COPY    /srcs/grafana-7.4.0.linux-amd64.tar.gz /
-COPY	/srcs/start.sh				/
-COPY	/srcs/supervisord.conf		/etc/supervisord.conf
-COPY	/srcs/telegraf.conf		    /etc/telegraf/telegraf.conf
+COPY    srcs/grafana-7.4.0.linux-amd64.tar.gz /
+COPY	srcs/start.sh				/
+COPY	srcs/supervisord.conf		/etc/supervisord.conf
+COPY	srcs/telegraf.conf		    /etc/telegraf/telegraf.conf
+COPY    srcs/health.sh              /
 
 RUN tar -zxvf grafana-7.4.0.linux-amd64.tar.gz
 WORKDIR	/grafana-7.4.0/bin/

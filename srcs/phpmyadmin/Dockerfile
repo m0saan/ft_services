@@ -18,14 +18,14 @@ RUN     apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/
 RUN     mkdir -p /etc/telegraf
 
 
-COPY     /srcs/telegraf.conf /etc/telegraf/
-COPY	/srcs/start.sh				/
+COPY     /srcs/telegraf.conf    /etc/telegraf/
+COPY	/srcs/start.sh			/
 COPY    /srcs/supervisord.conf  /etc/supervisord.conf
-COPY    /srcs/nginx.conf    /etc/nginx/nginx.conf
-COPY    /srcs/config.inc.php .
-COPY    srcs/localhost.key  /etc/nginx/ssl
-COPY    srcs/localhost.crt  /etc/nginx/ssl
-
+COPY    /srcs/nginx.conf        /etc/nginx/nginx.conf
+COPY    /srcs/config.inc.php    .
+COPY    srcs/localhost.key      /etc/nginx/ssl
+COPY    srcs/localhost.crt      /etc/nginx/ssl
+COPY    srcs/health.sh          /
 
 RUN     cp config.inc.php /var/www/phpmyadmin/
 RUN     mkdir -p /run/nginx

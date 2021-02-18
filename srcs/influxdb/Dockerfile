@@ -7,10 +7,10 @@ RUN		apk update && apk add openrc --no-cache && \
 		openrc && touch /run/openrc/softlevel
 RUN		mkdir -p /etc/telegraf/
 
-COPY	/srcs/start.sh				/
-COPY	/srcs/telegraf.conf			/etc/telegraf/telegraf.conf
-COPY	/srcs/supervisord.conf			/etc/supervisord.conf
-
+COPY	srcs/start.sh				/
+COPY	srcs/telegraf.conf			/etc/telegraf/telegraf.conf
+COPY	srcs/supervisord.conf		/etc/supervisord.conf
+COPY    srcs/health.sh              /
 
 EXPOSE	8086 8088
 

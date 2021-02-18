@@ -9,10 +9,11 @@ RUN     yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout /et
 # We create a user
 RUN     adduser -D user && echo "user:password" | chpasswd
 
-COPY    srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
-COPY    srcs/run.sh /
-COPY    srcs/supervisord.conf /etc/supervisord.conf
-COPY    srcs/telegraf.conf /etc/telegraf/
+COPY    srcs/vsftpd.conf        /etc/vsftpd/vsftpd.conf
+COPY    srcs/run.sh             /
+COPY    srcs/supervisord.conf   /etc/supervisord.conf
+COPY    srcs/telegraf.conf      /etc/telegraf/
+COPY    srcs/health.sh          /
 
 RUN     mkdir -p /run/openrc/ && touch /run/openrc/softlevel
 RUN     chmod +x run.sh

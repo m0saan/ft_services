@@ -5,11 +5,12 @@ RUN		apk add mariadb mariadb-common mariadb-client openrc supervisor && \
 RUN     apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 RUN     mkdir -p /etc/telegraf
 
-COPY     srcs/telegraf.conf /etc/telegraf/
+COPY     srcs/telegraf.conf     /etc/telegraf/
 COPY	srcs/start.sh			/
 COPY	srcs/wordpress.sql		/
-COPY	srcs/my.cnf /etc/mysql/my.cnf
-COPY    srcs/supervisord.conf /etc/supervisord.conf
+COPY	srcs/my.cnf             /etc/mysql/my.cnf
+COPY    srcs/supervisord.conf   /etc/supervisord.conf
+COPY    srcs/health.sh          /
 
 RUN     chmod +x start.sh
 VOLUME [ "/sys/fs/cgroup" ]
