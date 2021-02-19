@@ -1,3 +1,3 @@
 #! /bin/bash
 
-supervisord -c /etc/supervisord.conf & tail -f /dev/null
+supervisord -c /etc/supervisord.conf
