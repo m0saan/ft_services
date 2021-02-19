@@ -58,6 +58,6 @@ spec:
             command:
               - sh
               - health.sh
-          initialDelaySeconds: 15
-          periodSeconds: 3
+          initialDelaySeconds: 5
+          periodSeconds: 1
 

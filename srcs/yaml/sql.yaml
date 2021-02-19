@@ -48,8 +48,8 @@ spec:
               command:
                 - sh
                 - health.sh
-            initialDelaySeconds: 15
-            periodSeconds: 3
+            initialDelaySeconds: 10
+            periodSeconds: 1
 
       # Volumes are declared at the pod level. They share its
       # lifecycle and are communal across containers inside it.
