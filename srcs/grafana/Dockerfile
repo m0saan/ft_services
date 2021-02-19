@@ -9,7 +9,7 @@ COPY	srcs/start.sh				/
 COPY	srcs/supervisord.conf		/etc/supervisord.conf
 COPY	srcs/telegraf.conf		    /etc/telegraf/telegraf.conf
 
-RUN tar -zxvf grafana-7.4.0.linux-amd64.tar.gz
+RUN     tar -zxvf grafana-7.4.0.linux-amd64.tar.gz
 WORKDIR	/grafana-7.4.0/bin/
 COPY    /srcs/grafana.db    ../data/grafana.db
 COPY    srcs/health.sh      .

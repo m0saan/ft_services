@@ -9,9 +9,9 @@ RUN		wget https://wordpress.org/wordpress-5.6.tar.gz && tar -xzvf wordpress-5.6.
 RUN		mkdir -p /var/www && mv /wordpress /var/www/
 RUN     apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 RUN     mkdir /etc/nginx/ssl
-RUN     chown -R root:root /etc/nginx/ssl
-RUN     chmod 600 /etc/nginx/ssl
-RUN     mkdir -p /etc/telegraf
+RUN     chown -R root:root /etc/nginx/ssl # set the user and group of $file to root.
+RUN     chmod 600 /etc/nginx/ssl   # The owner has full read and write access to the file, while no other user can.
+RUN     mkdir -p /etc/telegraf     # Needed for telegraf to be run.
 
 COPY    srcs/telegraf.conf        /etc/telegraf/
 COPY	srcs/wp-config.php			/var/www/wordpress/
