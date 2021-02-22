@@ -5,7 +5,7 @@
 apiVersion: v1
 kind: Service
 metadata:                     # Metadata - Meta-information about the object itself
-  name: wordpress-service     # Service name
+  name: wordpress             # Service name
   labels:                     # Define labels for the pod
     app: wordpress
   annotations:
@@ -26,7 +26,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-deployment
+  name: wordpress
   labels:
     app: wordpress
 

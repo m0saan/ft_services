@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 
 metadata:
-  name: influxdb-service
+  name: influxdb
   labels:
     app: influxdb
 
@@ -21,7 +21,7 @@ kind: Deployment
 apiVersion: apps/v1
 
 metadata:
-  name: influxdb-deployment
+  name: influxdb
   labels:
     app: influxdb
 
