@@ -55,3 +55,11 @@ To interact with a Kubernetes cluster, you use the command line tool kubectl. Th
 
 A pod contains one or more containers, and all the containers in a pod are guaranteed to run on the same machine in the Kubernetes cluster. Containers in a pod share their networking infrastructure, their storage resources, and their lifecycle.
 
+#### Labels
+Kubernetes lets you associate key-value pairs to objects to help you identify and query them later. These key-value pairs are called labels.
+
+#### Selectors
+Selectors are the counterpart to labels that make labels useful. They are the mechanism for performing queries based on objects' labels. Selectors let you select a group of objects based on the key-value pairs that have been set as their labels.
+
+- Labels and selectors have a functional purpose. Labels are key-value pairs set on an object. Selectors are queries that search for objects based on those key-value pairs. Because they're used in queries and sorting, labels need to be short and simple.
+
