@@ -71,5 +71,8 @@ Annotations are also key-value pairs, however annotations won't be indexed or qu
 ### Deployments
 Deployments in Kubernetes let you manage a set of identical pods through a single parent object—the deployment.
 
-#### Services
+### Services
 Services let you define networking rules for pods based on their labels. Whenever a pod with a matching label appears in the Kubernetes cluster, the service will detect it and start using it to handle network requests made to the service.
+
+###  Volume
+A volume provides storage to your pod and the containers running inside it. The storage will live for as long as the pod lives—data will survive across container restarts but will be lost when the pod is destroyed. Further, this storage can be shared across containers, so if two containers are running in the same pod, they will be able to share files using the volume.
