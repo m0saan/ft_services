@@ -63,3 +63,8 @@ Selectors are the counterpart to labels that make labels useful. They are the me
 
 - Labels and selectors have a functional purpose. Labels are key-value pairs set on an object. Selectors are queries that search for objects based on those key-value pairs. Because they're used in queries and sorting, labels need to be short and simple.
 
+#### Annotations
+Annotations are also key-value pairs, however annotations won't be indexed or queried on, and they’ll never be used to identify your objects.
+- Annotations can store large amounts of data, potentially in a structured format.
+- They are useful for storing version numbers, contributor lists, contact details, short release descriptions, links to logs and dashboards...
+
