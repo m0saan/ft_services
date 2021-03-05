@@ -70,3 +70,6 @@ Annotations are also key-value pairs, however annotations won't be indexed or qu
 
 ### Deployments
 Deployments in Kubernetes let you manage a set of identical pods through a single parent object—the deployment.
+
+#### Services
+Services let you define networking rules for pods based on their labels. Whenever a pod with a matching label appears in the Kubernetes cluster, the service will detect it and start using it to handle network requests made to the service.
