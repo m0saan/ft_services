@@ -68,3 +68,5 @@ Annotations are also key-value pairs, however annotations won't be indexed or qu
 - Annotations can store large amounts of data, potentially in a structured format.
 - They are useful for storing version numbers, contributor lists, contact details, short release descriptions, links to logs and dashboards...
 
+### Deployments
+Deployments in Kubernetes let you manage a set of identical pods through a single parent object—the deployment.
